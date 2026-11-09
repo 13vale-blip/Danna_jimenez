@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!--
+    =====================================================================
+    PROYECTO FORMATIVO: S.I. REGISTRO Y CONTROL DE INASISTENCIAS
+    Evidencia: GA7-220501096-AA4-EV03 - Componente front-end
+    Módulo codificado: INASISTENCIAS (formulario de registro)
+
+    Archivos del proyecto:
+      - index.html  -> estructura (este archivo)
+      - estilos.css -> presentación y diseño responsive
+      - script.js   -> comportamiento (menú hamburguesa y formulario)
+      - Imagenes/   -> recursos gráficos
+    =====================================================================
+-->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <!-- Necesario para que el diseño se adapte a celulares y tablets -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inasistencias y Horarios | Aprendices del Saber</title>
+
+    <!-- Hoja de estilos del proyecto -->
+    <link rel="stylesheet" href="estilos.css">
+
+    <!-- "defer": el script se ejecuta cuando el HTML ya fue cargado -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Contenedor general (abuelo): agrupa toda la página -->
+    <div id="abuelo">
+
+        <!-- ENCABEZADO: logo, nombre de la institución y del sistema -->
+        <header id="encabezado">
+            <img src="Imagenes/logo-institucion.webp" class="logo logo--encabezado"
+                 alt="Logo de la Institución Educativa Aprendices del Saber">
+            <h1>"INSTITUCIÓN EDUCATIVA APRENDICES DEL SABER"</h1>
+            <h2>"S.I. REGISTRO Y CONTROL: INASISTENCIAS + HORARIO + INTEGRANTES COMUNIDAD EDUCATIVA"</h2>
+        </header>
+
+        <!-- MENÚ PRINCIPAL
+             En pantallas grandes se ve la lista completa.
+             En pantallas de 600px o menos aparece el botón hamburguesa
+             y la lista se muestra u oculta con JavaScript. -->
+        <nav id="menu" aria-label="Menú principal">
+
+            <!-- Botón hamburguesa (☰): solo visible en pantallas pequeñas -->
+            <button id="btn-hamburguesa" type="button"
+                    aria-controls="lista-menu" aria-expanded="false">
+                <span class="hamburguesa__linea"></span>
+                <span class="hamburguesa__linea"></span>
+                <span class="hamburguesa__linea"></span>
+                <span class="solo-lectores">Abrir o cerrar el menú</span>
+            </button>
+
+            <ul id="lista-menu">
+                <!-- Los enlaces con "#" se conectarán a su módulo cuando se desarrolle -->
+                <li><a href="#">Validación Operarios</a></li>
+                <li><a href="#">Comunidades Educativas y Horarios</a></li>
+                <li><a href="#formulario">Inasistencias</a></li>
+                <li><a href="#">Ver Informes</a></li>
+            </ul>
+        </nav>
+
+        <!-- CONTENIDO PRINCIPAL: misión y visión + formulario -->
+        <main id="contenido">
+
+            <!-- Sección informativa: misión y visión de la institución -->
+            <section id="seccion">
+
+                <article class="tarjeta mision">
+                    <h2>MISIÓN</h2>
+                    <img src="Imagenes/icono-mision.png" class="logo" alt="Símbolo de la misión">
+                    <p>
+                        La Institución "Aprendices del Saber" tiene la misión de formar un
+                        estudiante con autonomía, autorregulación, creatividad e integralidad,
+                        en el liderazgo de procesos en informática; enfocados en la
+                        investigación formativa y la participación en el desarrollo de su
+                        proyecto de vida.
+                        <mark>Artículo 1</mark>
+                    </p>
+                    <footer>
+                        <small><em><b>Fin Artículo 1</b></em></small>
+                    </footer>
+                </article>
+
+                <article class="tarjeta vision">
+                    <h2>VISIÓN</h2>
+                    <img src="Imagenes/icono-vision.jpg" class="logo" alt="Persona con dinero, símbolo de la visión">
+                    <p>
+                        Para el año 2031, ser una institución educativa líder en la formación
+                        de seres humanos íntegros, con responsabilidad hacia el progreso de su
+                        entorno cultural, social, económico, ambiental y político.
+                        <mark>Artículo 2</mark>
+                    </p>
+                    <footer>
+                        <small><em><b>Fin Artículo 2</b></em></small>
+                    </footer>
+                </article>
+            </section>
+
+            <!-- MÓDULO INASISTENCIAS: formulario de registro -->
+            <aside id="formulario">
+                <h3>Formulario web: Registro de inasistencias</h3>
+
+                <!-- Cada <label> se asocia a su campo con for="" + id="" -->
+                <form id="form-inasistencia" class="mi-forma" name="Formulario">
+
+                    <label for="id-inasistencia">Id. Inasistencia:</label>
+                    <input type="number" id="id-inasistencia" name="idInasistencia"
+                           min="1" required placeholder="Ej: 101">
+
+                    <label for="documento">Documento Comunidad Educativa:</label>
+                    <input type="number" id="documento" name="documento"
+                           min="1" required placeholder="Ingrese # Documento">
+
+                    <!-- Este campo se llena solo con la fecha y hora actual (ver script.js) -->
+                    <label for="fecha-hora">Fecha y Hora Actual:</label>
+                    <input type="datetime-local" id="fecha-hora" name="fechaHora" required>
+
+                    <label for="id-horario">Id. Horario:</label>
+                    <input type="number" id="id-horario" name="idHorario"
+                           min="1" required placeholder="Ej: 5">
+
+                    <label for="fecha-inasistencia">Fecha Inasistencia Horario:</label>
+                    <input type="date" id="fecha-inasistencia" name="fechaInasistencia" required>
+
+                    <label for="novedades">Novedades Inasistencia Horario:</label>
+                    <textarea id="novedades" name="novedades" rows="3" required
+                              placeholder="Describa la novedad"></textarea>
+
+                    <button type="submit" class="boton-enviar">Registrar inasistencia</button>
+                </form>
+
+                <!-- Mensaje de confirmación: se muestra con JavaScript al registrar -->
+                <p id="mensaje-formulario" role="status" aria-live="polite" hidden></p>
+            </aside>
+        </main>
+
+        <!-- PIE DE PÁGINA: datos de contacto -->
+        <footer id="pie">
+            <address>
+                <b>
+                    Ubicación: calle avenida 34 sexta número 30 - 24<br>
+                    Barrio: Teusaquillo, Bogotá D.C.<br>
+                    Teléfono: 38963222 - 3140000<br>
+                    Email: aprendicesdelsaber.edu.co
+                </b>
+            </address>
+        </footer>
+
+    </div>
+</body>
+</html>

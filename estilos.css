@@ -1,0 +1,391 @@
+/* =====================================================================
+   ESTILOS - S.I. REGISTRO Y CONTROL DE INASISTENCIAS
+   Evidencia: GA7-220501096-AA4-EV03 - Componente front-end
+
+   Organización del archivo:
+     1. Variables y reinicio
+     2. Estructura general (abuelo)
+     3. Encabezado
+     4. Menú y botón hamburguesa
+     5. Contenido: misión / visión
+     6. Formulario de inasistencias
+     7. Pie de página
+     8. Diseño responsive (600px o menos)
+   ===================================================================== */
+
+
+/* ---------- 1. VARIABLES Y REINICIO ---------- */
+
+/* Paleta del proyecto: se define una sola vez y se reutiliza */
+:root {
+    --violeta: #3e2a66;
+    --violeta-claro: #5a53ab;
+    --azul: #03a2f2;
+    --dorado: #f0b906;
+    --crema: #fffbcc;
+    --menta: #a9e5f9;
+    --rojo-oscuro: #8b1a1a;
+    --texto: #1f1a2e;
+    --radio: 16px;
+}
+
+/* Quita márgenes por defecto y cuenta el borde dentro del tamaño */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Trebuchet MS", "Gill Sans", Calibri, sans-serif;
+    color: var(--texto);
+    line-height: 1.5;
+    /* Capa oscura sobre la imagen de fondo para que el contenido se lea bien */
+    background:
+        linear-gradient(rgba(31, 26, 46, 0.45), rgba(31, 26, 46, 0.45)),
+        url("Imagenes/fondo-pagina.png") center / cover fixed no-repeat;
+    border: 10px solid var(--azul);
+    min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* Texto solo para lectores de pantalla (oculto a la vista) */
+.solo-lectores {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+/* Foco visible para quien navega con teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--dorado);
+    outline-offset: 2px;
+}
+
+
+/* ---------- 2. ESTRUCTURA GENERAL ---------- */
+
+#abuelo {
+    max-width: 1100px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.94);
+    border: 8px solid var(--rojo-oscuro);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* Logo reutilizable (encabezado, misión y visión) */
+.logo {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 4px double var(--violeta);
+    border-bottom-width: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
+/* ---------- 3. ENCABEZADO ---------- */
+
+#encabezado {
+    background: var(--violeta);
+    border-bottom: 8px solid var(--dorado);
+    padding: 24px 20px;
+    text-align: center;
+}
+
+#encabezado h1 {
+    margin-top: 12px;
+    font-size: 1.4rem;
+    color: #ffffff;
+}
+
+#encabezado h2 {
+    margin-top: 6px;
+    font-size: 1rem;
+    color: var(--dorado);
+}
+
+
+/* ---------- 4. MENÚ Y BOTÓN HAMBURGUESA ---------- */
+
+#menu {
+    background: var(--violeta-claro);
+    border-bottom: 4px solid var(--azul);
+    padding: 12px;
+}
+
+#lista-menu {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+#lista-menu a {
+    display: inline-block;
+    padding: 8px 16px;
+    font: bold 0.95rem Verdana, sans-serif;
+    color: var(--texto);
+    text-decoration: none;
+    background: #ffffff;
+    border: 4px solid var(--dorado);
+    border-radius: 20px;
+    transition: background 0.3s, color 0.3s;
+}
+
+#lista-menu a:hover {
+    background: var(--dorado);
+}
+
+/* El botón hamburguesa está oculto en pantallas grandes */
+#btn-hamburguesa {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    background: var(--violeta);
+    border: 3px solid var(--dorado);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Cada una de las tres rayas del botón */
+.hamburguesa__linea {
+    display: block;
+    width: 28px;
+    height: 4px;
+    background: #ffffff;
+    border-radius: 2px;
+}
+
+
+/* ---------- 5. CONTENIDO: MISIÓN / VISIÓN ---------- */
+
+/* Dos columnas: información a la izquierda, formulario a la derecha */
+#contenido {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 24px;
+    padding: 24px;
+}
+
+#seccion {
+    display: grid;
+    gap: 20px;
+    align-content: start;
+    background: rgb(123, 225, 181);
+    border: 8px solid #d411d4;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.tarjeta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: var(--crema);
+    border: 5px solid #1c4202;
+    border-radius: 20px;
+    padding: 12px;
+    box-shadow: 5px 5px rgb(50, 26, 139);
+    transition: background 0.5s;
+}
+
+.tarjeta h2 {
+    color: var(--rojo-oscuro);
+}
+
+.tarjeta .logo {
+    align-self: flex-start;
+}
+
+/* Efecto al pasar el mouse sobre misión y visión */
+.mision:hover {
+    background: rgb(66, 172, 255);
+}
+
+.vision:hover {
+    background: royalblue;
+}
+
+.tarjeta footer {
+    align-self: flex-end;
+    padding: 2px 8px;
+    background: var(--dorado);
+}
+
+
+/* ---------- 6. FORMULARIO DE INASISTENCIAS ---------- */
+
+#formulario {
+    align-self: start;
+    padding: 16px;
+    background: #709890 url("Imagenes/fondo-formulario.webp") center / cover no-repeat;
+    border: 8px solid #a46b62;
+    border-radius: 20px;
+}
+
+#formulario h3 {
+    margin-bottom: 12px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #24063b;
+}
+
+/* Tarjeta del formulario: etiquetas arriba, campos debajo */
+.mi-forma {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: var(--violeta-claro);
+    border: 8px solid var(--menta);
+    border-radius: 20px;
+    padding: 16px;
+    transition: background 0.5s;
+}
+
+.mi-forma:hover,
+.mi-forma:focus-within {
+    background: rgb(191, 204, 244);
+}
+
+.mi-forma label {
+    margin-top: 6px;
+    font-weight: bold;
+}
+
+.mi-forma input,
+.mi-forma textarea {
+    width: 100%;
+    padding: 6px 10px;
+    font: 1rem Arial, sans-serif;
+    background: #e8f1ef;
+    border: 2px solid #df0a66;
+    border-radius: 10px;
+}
+
+.mi-forma textarea {
+    resize: vertical;
+}
+
+.boton-enviar {
+    align-self: center;
+    margin-top: 14px;
+    padding: 8px 20px;
+    font: bold 1rem Arial, sans-serif;
+    color: #0000ff;
+    background: #ffffff;
+    border: 2px solid var(--violeta);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.boton-enviar:hover {
+    background: var(--dorado);
+}
+
+/* Mensaje de confirmación (lo muestra script.js al registrar) */
+#mensaje-formulario {
+    margin-top: 12px;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #0b4d1c;
+    background: #d6f5dd;
+    border: 2px solid #1c8f3a;
+    border-radius: 10px;
+}
+
+/* El atributo hidden debe ocultar el mensaje aunque tenga estilos propios */
+#mensaje-formulario[hidden] {
+    display: none;
+}
+
+
+/* ---------- 7. PIE DE PÁGINA ---------- */
+
+#pie {
+    margin: 0 24px 24px;
+    padding: 20px;
+    text-align: center;
+    background: aquamarine;
+    border: 4px solid var(--texto);
+    border-bottom-width: 10px;
+    border-radius: 20px;
+    box-shadow: 5px 5px var(--rojo-oscuro);
+}
+
+#pie address {
+    font-style: normal;
+}
+
+
+/* ---------- 8. DISEÑO RESPONSIVE (600px o menos) ---------- */
+
+@media (max-width: 600px) {
+
+    body {
+        border-width: 4px;
+    }
+
+    #abuelo {
+        margin: 8px;
+        border-width: 5px;
+    }
+
+    /* Una sola columna: primero misión/visión y luego el formulario */
+    #contenido {
+        grid-template-columns: 1fr;
+        padding: 12px;
+    }
+
+    #pie {
+        margin: 0 12px 12px;
+    }
+
+    /* Aparece el botón hamburguesa */
+    #btn-hamburguesa {
+        display: flex;
+        margin: 0 auto;
+    }
+
+    /* La lista del menú queda oculta hasta que se pulse la hamburguesa */
+    #lista-menu {
+        display: none;
+        flex-direction: column;
+        margin-top: 12px;
+    }
+
+    /* script.js agrega esta clase al <nav> para mostrar el menú */
+    #menu.menu--abierto #lista-menu {
+        display: flex;
+    }
+
+    #lista-menu a {
+        display: block;
+        text-align: center;
+    }
+
+    #encabezado h1 {
+        font-size: 1.15rem;
+    }
+}
+
+/* Respeta a quien desactiva las animaciones en su dispositivo */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}
