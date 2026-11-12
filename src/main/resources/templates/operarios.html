@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Operarios · Inasistencias</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<header class="barra">
+    <span class="marca">Sistema de Inasistencias</span>
+    <nav>
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/operarios}">Operarios</a>
+    </nav>
+</header>
+
+<main class="contenido">
+    <div class="encabezado">
+        <h1>Módulo 1. Operarios</h1>
+        <a class="boton" th:href="@{/operarios/nuevo}">Registrar operario</a>
+    </div>
+
+    <!-- Mensajes que llegan despues de registrar, editar o eliminar -->
+    <div class="mensaje exito" th:if="${mensajeExito}" th:text="${mensajeExito}"></div>
+    <div class="mensaje error" th:if="${mensajeError}" th:text="${mensajeError}"></div>
+
+    <!-- Consulta (Read): lista de operarios -->
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre operario</th>
+            <th>Tipo operario</th>
+            <th>Tipo documento</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${#lists.isEmpty(operarios)}">
+            <td colspan="5">No hay operarios registrados.</td>
+        </tr>
+        <tr th:each="operario : ${operarios}">
+            <td th:text="${operario.idLogin}">1</td>
+            <td th:text="${operario.nombreOperario}">Nombre</td>
+            <td th:text="${operario.idTipoOperario}">1</td>
+            <td th:text="${operario.idTipoDocumento}">1</td>
+            <td>
+                <a class="boton secundario" th:href="@{/operarios/editar/{id}(id=${operario.idLogin})}">Editar</a>
+                <!-- Eliminar pide confirmacion antes de enviar -->
+                <form th:action="@{/operarios/eliminar/{id}(id=${operario.idLogin})}" method="post"
+                      th:attr="data-nombre=${operario.nombreOperario}"
+                      onsubmit="return confirm('¿Seguro que desea eliminar al operario ' + this.dataset.nombre + '?');">
+                    <button type="submit" class="peligro">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
