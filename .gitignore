@@ -3,3 +3,13 @@
 Thumbs.db
 # Editor
 .vscode/
+
+# Java / Spring Boot (inasistencias/)
+target/
+.idea/
+*.iml
+*.log
+
+# Node.js (API-REST/)
+node_modules/
+.env
