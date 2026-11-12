@@ -1,0 +1,76 @@
+/* Estilos generales del sistema de inasistencias */
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f3f5f7;
+    color: #222;
+}
+
+/* Barra superior */
+.barra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    background: #39a900; /* verde institucional SENA */
+    color: #fff;
+}
+.barra .marca { font-weight: bold; font-size: 18px; }
+.barra nav a { color: #fff; margin-left: 16px; text-decoration: none; }
+.barra nav a:hover { text-decoration: underline; }
+
+/* Contenedor principal */
+.contenido {
+    max-width: 960px;
+    margin: 32px auto;
+    padding: 24px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .12);
+}
+.centrado { text-align: center; }
+.angosto { max-width: 420px; }
+
+h1 { margin-top: 0; color: #00324d; }
+
+/* Formularios */
+label { display: block; margin: 12px 0 4px; font-weight: bold; text-align: left; }
+input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    font-size: 15px;
+}
+input[readonly] { background: #eee; color: #555; }
+
+.boton, button {
+    display: inline-block;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background: #39a900;
+    color: #fff;
+    font-size: 15px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.boton:hover, button:hover { background: #2e8700; }
+.boton.secundario { background: #6c757d; }
+.boton.peligro, button.peligro { background: #c0392b; }
+.acciones { margin-top: 20px; display: flex; gap: 8px; justify-content: flex-start; }
+
+/* Mensajes */
+.mensaje { padding: 10px 14px; border-radius: 4px; margin: 12px 0; text-align: left; }
+.mensaje.error { background: #fdecea; color: #a12622; border: 1px solid #f5c2c0; }
+.mensaje.exito { background: #e8f6e0; color: #276b00; border: 1px solid #bfe3a8; }
+
+/* Tabla */
+table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+th, td { padding: 8px 10px; border-bottom: 1px solid #ddd; text-align: left; }
+th { background: #00324d; color: #fff; }
+td form { display: inline; }
+td .boton, td button { padding: 4px 10px; font-size: 14px; }
+.encabezado { display: flex; justify-content: space-between; align-items: center; }

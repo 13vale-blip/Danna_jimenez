@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inicio · Inasistencias</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<header class="barra">
+    <span class="marca">Sistema de Inasistencias</span>
+    <nav>
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/operarios}">Operarios</a>
+        <a th:if="${nombreOperario == null}" th:href="@{/login}">Ingresar</a>
+        <a th:if="${nombreOperario != null}" th:href="@{/logout}">Salir</a>
+    </nav>
+</header>
+
+<main class="contenido centrado">
+    <h1>Página en construcción</h1>
+    <p th:if="${nombreOperario != null}">
+        Bienvenido(a), <strong th:text="${nombreOperario}">operario</strong>.
+    </p>
+    <p>Este es el inicio del sistema de control de inasistencias. Los módulos se irán agregando por etapas.</p>
+    <p><a class="boton" th:href="@{/operarios}">Ir al módulo Operarios</a></p>
+</main>
+</body>
+</html>
