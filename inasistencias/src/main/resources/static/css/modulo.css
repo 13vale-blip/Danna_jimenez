@@ -1,0 +1,168 @@
+/* =====================================================================
+   ESTILOS DE LOS MODULOS (login y operarios)
+   Complementan estilos.css del front-end y usan su misma paleta
+   (variables --violeta, --dorado, --crema, etc.).
+   ===================================================================== */
+
+/* Contenedor principal de cada modulo */
+.modulo {
+    padding: 24px;
+}
+
+.modulo__titulo {
+    margin-bottom: 16px;
+    text-align: center;
+    color: var(--violeta);
+}
+
+/* Tarjeta clara donde va el contenido del modulo */
+.tarjeta-modulo {
+    background: var(--crema);
+    border: 5px solid var(--violeta-claro);
+    border-radius: var(--radio);
+    padding: 16px;
+    box-shadow: 5px 5px var(--violeta);
+}
+
+/* Version angosta para formularios (login, registrar, editar) */
+.angosto {
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* Barra con el operario que inicio sesion */
+.barra-sesion {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 24px;
+    background: var(--crema);
+    border-bottom: 3px solid var(--dorado);
+}
+
+.barra-sesion a {
+    font-weight: bold;
+    color: var(--rojo-oscuro);
+}
+
+/* Titulo del modulo con el boton "Registrar" a la derecha */
+.encabezado-modulo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.encabezado-modulo h3 {
+    color: var(--violeta);
+}
+
+/* Mensajes de exito y de error */
+.mensaje {
+    margin-bottom: 12px;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.mensaje--exito {
+    color: #0b4d1c;
+    background: #d6f5dd;
+    border: 2px solid #1c8f3a;
+}
+
+.mensaje--error {
+    color: var(--rojo-oscuro);
+    background: #fde4e4;
+    border: 2px solid #c0392b;
+}
+
+/* Botones tipo "pastilla", como los del menu */
+.boton {
+    display: inline-block;
+    padding: 6px 14px;
+    font: bold 0.95rem Verdana, sans-serif;
+    color: var(--texto);
+    text-decoration: none;
+    background: #ffffff;
+    border: 3px solid var(--dorado);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+.boton:hover {
+    background: var(--dorado);
+}
+
+.boton--peligro {
+    color: var(--rojo-oscuro);
+    border-color: var(--rojo-oscuro);
+}
+
+.boton--peligro:hover {
+    color: #ffffff;
+    background: var(--rojo-oscuro);
+}
+
+.acciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+/* Dentro de .acciones el boton del front-end no necesita su margen propio */
+.acciones .boton-enviar {
+    margin-top: 0;
+}
+
+/* El ID no se edita: se muestra gris */
+.mi-forma input[readonly] {
+    color: #555555;
+    background: #d9d9d9;
+}
+
+/* Tabla de operarios (con desplazamiento horizontal en celulares) */
+.tabla-contenedor {
+    overflow-x: auto;
+}
+
+.tabla-operarios {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+}
+
+.tabla-operarios th {
+    padding: 8px 10px;
+    text-align: left;
+    color: #ffffff;
+    background: var(--violeta);
+}
+
+.tabla-operarios td {
+    padding: 8px 10px;
+    border-bottom: 2px solid var(--menta);
+}
+
+.tabla-operarios td form {
+    display: inline;
+}
+
+.tabla-operarios .acciones {
+    justify-content: flex-start;
+    margin-top: 0;
+}
+
+@media (max-width: 600px) {
+    .modulo {
+        padding: 12px;
+    }
+}

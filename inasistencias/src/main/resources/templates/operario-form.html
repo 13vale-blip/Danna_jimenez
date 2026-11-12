@@ -1,56 +1,55 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title th:text="${esEdicion} ? 'Editar operario' : 'Registrar operario'">Operario</title>
-    <link rel="stylesheet" th:href="@{/css/estilos.css}">
-</head>
+<head th:replace="~{fragmentos :: cabeza(${esEdicion} ? 'Editar operario' : 'Registrar operario')}"></head>
 <body>
-<header class="barra">
-    <span class="marca">Sistema de Inasistencias</span>
-    <nav>
-        <a th:href="@{/}">Inicio</a>
-        <a th:href="@{/operarios}">Operarios</a>
-    </nav>
-</header>
+<div id="abuelo">
+    <header th:replace="~{fragmentos :: encabezado}"></header>
+    <nav th:replace="~{fragmentos :: menu}"></nav>
+    <div th:replace="~{fragmentos :: sesion}"></div>
 
-<main class="contenido angosto">
-    <h1 th:text="${esEdicion} ? 'Editar operario' : 'Registrar operario'">Registrar operario</h1>
+    <!-- MODULO 1: OPERARIOS (registrar / Create y editar / Update) -->
+    <main class="modulo">
+        <h2 class="modulo__titulo" th:text="${esEdicion} ? 'Editar operario' : 'Registrar operario'">Registrar operario</h2>
 
-    <!-- Mensaje de validacion -->
-    <div class="mensaje error" th:if="${mensajeError}" th:text="${mensajeError}"></div>
+        <div class="tarjeta-modulo angosto">
+            <!-- Mensaje de validacion -->
+            <div class="mensaje mensaje--error" th:if="${mensajeError}" th:text="${mensajeError}"></div>
 
-    <!-- El mismo formulario sirve para registrar (Create) y editar (Update) -->
-    <form method="post" th:object="${operario}"
-          th:action="${esEdicion} ? @{/operarios/actualizar/{id}(id=*{idLogin})} : @{/operarios/guardar}">
+            <!-- El mismo formulario sirve para registrar (Create) y editar (Update) -->
+            <form class="mi-forma" method="post" th:object="${operario}"
+                  th:action="${esEdicion} ? @{/operarios/actualizar/{id}(id=*{idLogin})} : @{/operarios/guardar}">
 
-        <label for="idLogin">ID operario</label>
-        <!-- En edicion el ID es de solo lectura: no se puede modificar -->
-        <input id="idLogin" type="number" min="1" th:field="*{idLogin}" th:readonly="${esEdicion}">
+                <label for="idLogin">ID operario:</label>
+                <!-- En edicion el ID es de solo lectura: no se puede modificar -->
+                <input id="idLogin" type="number" min="1" th:field="*{idLogin}" th:readonly="${esEdicion}">
 
-        <label for="nombreOperario">Nombre operario</label>
-        <input id="nombreOperario" type="text" maxlength="100" th:field="*{nombreOperario}">
+                <label for="nombreOperario">Nombre operario:</label>
+                <input id="nombreOperario" type="text" maxlength="100" th:field="*{nombreOperario}">
 
-        <!-- Las contrasenas nunca se envian de vuelta al navegador -->
-        <label for="password">Contraseña (máx. 8)</label>
-        <input id="password" name="password" type="password" maxlength="8"
-               th:placeholder="${esEdicion} ? 'Dejar en blanco para conservar la actual' : ''">
+                <!-- Las contrasenas nunca se envian de vuelta al navegador -->
+                <label for="password">Contraseña (máx. 8):</label>
+                <input id="password" name="password" type="password" maxlength="8"
+                       th:placeholder="${esEdicion} ? 'Dejar en blanco para conservar la actual' : ''">
 
-        <label for="confirmarPassword">Confirmar contraseña</label>
-        <input id="confirmarPassword" name="confirmarPassword" type="password" maxlength="8">
+                <label for="confirmarPassword">Confirmar contraseña:</label>
+                <input id="confirmarPassword" name="confirmarPassword" type="password" maxlength="8">
 
-        <label for="idTipoOperario">Tipo de operario (1 Administrador, 2 Auxiliar)</label>
-        <input id="idTipoOperario" type="number" th:field="*{idTipoOperario}">
+                <label for="idTipoOperario">Tipo de operario (1 Administrador, 2 Auxiliar):</label>
+                <input id="idTipoOperario" type="number" th:field="*{idTipoOperario}">
 
-        <label for="idTipoDocumento">Tipo de documento (1 CC, 2 TI)</label>
-        <input id="idTipoDocumento" type="number" th:field="*{idTipoDocumento}">
+                <label for="idTipoDocumento">Tipo de documento (1 CC, 2 TI):</label>
+                <input id="idTipoDocumento" type="number" th:field="*{idTipoDocumento}">
 
-        <div class="acciones">
-            <button type="submit" th:text="${esEdicion} ? 'Guardar cambios' : 'Registrar'">Registrar</button>
-            <a class="boton secundario" th:href="@{/operarios}">Cancelar</a>
+                <div class="acciones">
+                    <button type="submit" class="boton-enviar"
+                            th:text="${esEdicion} ? 'Guardar cambios' : 'Registrar'">Registrar</button>
+                    <a class="boton" th:href="@{/operarios}">Cancelar</a>
+                </div>
+            </form>
         </div>
-    </form>
-</main>
+    </main>
+
+    <footer th:replace="~{fragmentos :: pie}"></footer>
+</div>
 </body>
 </html>

@@ -35,7 +35,11 @@ public class LoginController {
      * Muestra el formulario de ingreso.
      */
     @GetMapping("/login")
-    public String mostrarLogin() {
+    public String mostrarLogin(HttpSession sesion) {
+        // Si ya inicio sesion, pasa directo al modulo Operarios
+        if (sesion.getAttribute(ATRIBUTO_SESION) != null) {
+            return "redirect:/operarios";
+        }
         return "login";
     }
 
@@ -46,7 +50,7 @@ public class LoginController {
      * @param password contrasena escrita
      * @param sesion   sesion HTTP, donde se guarda el operario si ingresa
      * @param modelo   datos para la vista en caso de error
-     * @return redireccion al inicio si es correcto, o el login con el mensaje de error
+     * @return redireccion al modulo Operarios si es correcto, o el login con el mensaje de error
      */
     @PostMapping("/login")
     public String validarLogin(@RequestParam("usuario") String usuario,
@@ -57,9 +61,9 @@ public class LoginController {
                 operariosRepository.findByNombreOperarioAndPassword(usuario.trim(), password);
 
         if (operario.isPresent()) {
-            // Datos correctos: se guarda el nombre en la sesion y se va al inicio
+            // Datos correctos: se guarda el nombre en la sesion y se entra al modulo Operarios
             sesion.setAttribute(ATRIBUTO_SESION, operario.get().getNombreOperario());
-            return "redirect:/";
+            return "redirect:/operarios";
         }
 
         // Datos incorrectos: se vuelve al login con el mensaje y el usuario escrito

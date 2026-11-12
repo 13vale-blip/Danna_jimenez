@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+    Fragmentos comunes de las paginas del proyecto Java.
+    Repiten el encabezado, el menu y el pie del front-end (index.html de la raiz)
+    para que login y operarios se vean como parte del mismo sistema.
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="cabeza(titulo)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo} + ' | Aprendices del Saber'">Aprendices del Saber</title>
+    <link rel="icon" th:href="@{/Imagenes/logo-institucion.webp}">
+    <!-- Estilos del front-end + estilos propios de los modulos -->
+    <link rel="stylesheet" th:href="@{/estilos.css}">
+    <link rel="stylesheet" th:href="@{/css/modulo.css}">
+    <!-- script.js del front-end: maneja el menu hamburguesa -->
+    <script th:src="@{/script.js}" defer></script>
+</head>
+<body>
+
+<!-- ENCABEZADO: el logo lleva al inicio -->
+<header th:fragment="encabezado" id="encabezado">
+    <a th:href="@{/}">
+        <img th:src="@{/Imagenes/logo-institucion.webp}" class="logo logo--encabezado"
+             alt="Logo de la Institución Educativa Aprendices del Saber">
+    </a>
+    <h1>"INSTITUCIÓN EDUCATIVA APRENDICES DEL SABER"</h1>
+    <h2>"S.I. REGISTRO Y CONTROL: INASISTENCIAS + HORARIO + INTEGRANTES COMUNIDAD EDUCATIVA"</h2>
+</header>
+
+<!-- MENU PRINCIPAL: mismas opciones del front-end -->
+<nav th:fragment="menu" id="menu" aria-label="Menú principal">
+    <button id="btn-hamburguesa" type="button" aria-controls="lista-menu" aria-expanded="false">
+        <span class="hamburguesa__linea"></span>
+        <span class="hamburguesa__linea"></span>
+        <span class="hamburguesa__linea"></span>
+        <span class="solo-lectores">Abrir o cerrar el menú</span>
+    </button>
+    <ul id="lista-menu">
+        <li><a th:href="@{/operarios}">Validación Operarios</a></li>
+        <li><a href="#">Comunidades Educativas y Horarios</a></li>
+        <li><a th:href="@{/#formulario}">Inasistencias</a></li>
+        <li><a href="#">Ver Informes</a></li>
+    </ul>
+</nav>
+
+<!-- BARRA DE SESION: operario que ingreso y enlace para salir -->
+<div th:fragment="sesion" class="barra-sesion" th:if="${operarioActual != null}">
+    <span>Operario: <strong th:text="${operarioActual}">Nombre</strong></span>
+    <a th:href="@{/logout}">Salir</a>
+</div>
+
+<!-- PIE DE PAGINA -->
+<footer th:fragment="pie" id="pie">
+    <address>
+        <b>
+            Ubicación: calle avenida 34 sexta número 30 - 24<br>
+            Barrio: Teusaquillo, Bogotá D.C.<br>
+            Teléfono: 38963222 - 3140000<br>
+            Email: aprendicesdelsaber.edu.co
+        </b>
+    </address>
+</footer>
+
+</body>
+</html>
