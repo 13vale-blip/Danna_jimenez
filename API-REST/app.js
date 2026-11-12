@@ -1,4 +1,4 @@
-// Servidor web de la API REST (Node.js + Express + MongoDB Atlas)
+// Servidor web de la API REST de inasistencias (Node.js + Express + MongoDB Atlas)
 
 // Carga las variables del archivo .env (MONGO_URI) sin mostrar avisos en consola
 require('dotenv').config({ quiet: true });
@@ -6,18 +6,31 @@ require('dotenv').config({ quiet: true });
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const rutasPost = require('./routes/post');
+const cors = require('cors');
+const rutasInasistencias = require('./routes/inasistencias');
 
 // Puerto del servidor web local
 const PUERTO = 10000;
 
+// Origen del front-end que puede llamar a la API desde el navegador.
+// El front-end lo sirve el proyecto Java (Spring Boot) en el puerto 8080.
+const ORIGEN_FRONTEND = process.env.ORIGEN_FRONTEND || 'http://localhost:8080';
+
 const app = express();
+
+// CORS: permite que el formulario del front-end (otro puerto) consuma la API
+app.use(cors({ origin: ORIGEN_FRONTEND }));
 
 // body-parser convierte el cuerpo JSON de las peticiones en un objeto (peticion.body)
 app.use(bodyParser.json());
 
-// Rutas del CRUD de publicaciones
-app.use('/posts', rutasPost);
+// Ruta de prueba: confirma que el servidor esta encendido
+app.get('/', (peticion, respuesta) => {
+  respuesta.send('API REST de inasistencias funcionando');
+});
+
+// Rutas del CRUD de inasistencias
+app.use('/inasistencias', rutasInasistencias);
 
 // Si el cuerpo no es un JSON valido, responde en JSON en lugar de una pagina de error
 app.use((error, peticion, respuesta, siguiente) => {
@@ -25,11 +38,6 @@ app.use((error, peticion, respuesta, siguiente) => {
     return respuesta.status(400).json({ mensaje: 'El cuerpo de la peticion no es un JSON valido' });
   }
   siguiente(error);
-});
-
-// Ruta de prueba: confirma que el servidor esta encendido
-app.get('/', (peticion, respuesta) => {
-  respuesta.send('Servidor API REST funcionando');
 });
 
 // Conexion a la base de datos MongoDB Atlas.
