@@ -308,6 +308,13 @@ textarea:focus-visible {
     border-radius: 10px;
 }
 
+/* Variante de error (la API no respondió o rechazó los datos) */
+#mensaje-formulario.mensaje--error {
+    color: var(--rojo-oscuro);
+    background: #fde4e4;
+    border-color: #c0392b;
+}
+
 /* El atributo hidden debe ocultar el mensaje aunque tenga estilos propios */
 #mensaje-formulario[hidden] {
     display: none;

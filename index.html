@@ -3,13 +3,17 @@
     =====================================================================
     PROYECTO FORMATIVO: S.I. REGISTRO Y CONTROL DE INASISTENCIAS
     Evidencia: GA7-220501096-AA4-EV03 - Componente front-end
+    Integrado con: AA5-EV03 (proyecto Java, inasistencias/) y
+                   AA5-EV04 (API REST Node.js, API-REST/)
     Módulo codificado: INASISTENCIAS (formulario de registro)
 
     Archivos del proyecto:
       - index.html  -> estructura (este archivo)
       - estilos.css -> presentación y diseño responsive
-      - script.js   -> comportamiento (menú hamburguesa y formulario)
+      - script.js   -> comportamiento (menú hamburguesa y envío a la API)
       - Imagenes/   -> recursos gráficos
+
+    Esta página la publica el proyecto Java en http://localhost:8080
     =====================================================================
 -->
 <html lang="es">
@@ -55,7 +59,8 @@
 
             <ul id="lista-menu">
                 <!-- Los enlaces con "#" se conectarán a su módulo cuando se desarrolle -->
-                <li><a href="#">Validación Operarios</a></li>
+                <!-- Validación Operarios: login y CRUD del proyecto Java (AA5-EV03) -->
+                <li><a href="/operarios">Validación Operarios</a></li>
                 <li><a href="#">Comunidades Educativas y Horarios</a></li>
                 <li><a href="#formulario">Inasistencias</a></li>
                 <li><a href="#">Ver Informes</a></li>
