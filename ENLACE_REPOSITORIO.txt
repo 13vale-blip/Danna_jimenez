@@ -1,5 +1,8 @@
-ENLACE DEL REPOSITORIO - Evidencia GA7-220501096-AA4-EV03
+ENLACE DEL REPOSITORIO - Proyecto formativo S.I. Registro y Control de Inasistencias
 
-Pega aqui el enlace de tu repositorio (GitHub o GitLab):
+https://github.com/13vale-blip/Danna_jimenez
 
-https://github.com/TU_USUARIO/TU_REPOSITORIO
+Evidencias incluidas en este repositorio:
+- GA7-220501096-AA4-EV03 Componente front-end ............ raíz del repositorio
+- GA7-220501096-AA5-EV03 Diseño y desarrollo de servicios web – proyecto ... carpeta inasistencias/
+- GA7-220501096-AA5-EV04 API del proyecto ................. carpeta API-REST/

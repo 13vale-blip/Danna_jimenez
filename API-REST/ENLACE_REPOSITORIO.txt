@@ -1,4 +1,8 @@
 Repositorio de la evidencia GA7-220501096-AA5-EV04
 API del proyecto
 
-https://github.com/13vale-blip/API-REST
+Repositorio del proyecto formativo (front-end, proyecto Java y API):
+https://github.com/13vale-blip/Danna_jimenez
+
+Carpeta de esta evidencia:
+https://github.com/13vale-blip/Danna_jimenez/tree/main/API-REST

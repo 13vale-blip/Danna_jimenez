@@ -1,24 +1,28 @@
-# API REST · Node.js + Express + MongoDB Atlas
+# API REST de inasistencias · Node.js + Express + MongoDB Atlas
 
 Evidencia **GA7-220501096-AA5-EV04 – API del proyecto**
-SENA · Tecnología en Análisis y Desarrollo de Software (ADSO) · Ficha 3235885 · Grupo colaborativo #10
-
-**Aprendices:** Danna Valentina Jiménez Durango · María José Almanza
-**Instructor:** Leonardo Lestra Salguero
+Parte del proyecto formativo [S.I. Registro y Control de Inasistencias](../README.md).
+SENA · ADSO · Ficha 3235885 · Grupo colaborativo #10 · Aprendices: Danna Valentina Jiménez Durango y María José Almanza · Instructor: Leonardo Lestra Salguero
 
 ## Descripción
 
-API REST que gestiona publicaciones (*posts*) guardadas en MongoDB Atlas. Implementa el CRUD completo (crear, consultar, actualizar y eliminar) y se probó con Postman.
+Servicio web que guarda las **inasistencias** registradas desde el formulario «Registro de inasistencias» del front-end del proyecto. Implementa el CRUD completo sobre MongoDB Atlas y se probó con Postman.
 El detalle de cada ruta está en [ENDPOINTS.md](ENDPOINTS.md).
 
 | Método | Ruta | Acción |
 |---|---|---|
 | GET | `/` | Mensaje de prueba del servidor |
-| POST | `/posts` | Crear publicación |
-| GET | `/posts` | Listar publicaciones |
-| GET | `/posts/:id` | Consultar una publicación |
-| PATCH | `/posts/:id` | Actualizar una publicación |
-| DELETE | `/posts/:id` | Eliminar una publicación |
+| POST | `/inasistencias` | Registrar inasistencia |
+| GET | `/inasistencias` | Listar inasistencias |
+| GET | `/inasistencias/:id` | Consultar una inasistencia |
+| PATCH | `/inasistencias/:id` | Actualizar una inasistencia |
+| DELETE | `/inasistencias/:id` | Eliminar una inasistencia |
+
+## Integración con el proyecto
+
+- El front-end (raíz del repositorio) lo publica la aplicación Java en `http://localhost:8080`.
+- Al enviar el formulario de inasistencias, `script.js` hace un `POST` a `http://localhost:10000/inasistencias` y muestra la respuesta de la API.
+- Como la página y la API están en puertos distintos, la API habilita **CORS** solo para `http://localhost:8080` (se puede cambiar con la variable `ORIGEN_FRONTEND`).
 
 ## Tecnologías
 
@@ -28,6 +32,7 @@ El detalle de cada ruta está en [ENDPOINTS.md](ENDPOINTS.md).
 | Express 5 | Servidor web y rutas |
 | Mongoose 9 | Modelo de datos y conexión a MongoDB |
 | body-parser | Lee el cuerpo JSON de las peticiones |
+| cors | Permite que el front-end (puerto 8080) consuma la API |
 | dotenv | Carga la cadena de conexión desde `.env` |
 | nodemon | Reinicia el servidor al guardar cambios (desarrollo) |
 | MongoDB Atlas | Base de datos en la nube (clúster gratuito M0, AWS, Virginia) |
@@ -37,15 +42,26 @@ El detalle de cada ruta está en [ENDPOINTS.md](ENDPOINTS.md).
 
 ```
 API-REST/
-├── app.js            servidor Express (puerto 10000) y conexión a MongoDB
+├── app.js                   servidor Express (puerto 10000), CORS y conexión a MongoDB
 ├── models/
-│   └── Post.js       modelo: title, description (obligatorios) y date (por defecto, la fecha actual)
+│   └── Inasistencia.js      modelo con los campos del formulario
 ├── routes/
-│   └── post.js       rutas del CRUD
-├── .env.example      plantilla de la variable MONGO_URI
-├── ENDPOINTS.md      documentación de las rutas
+│   └── inasistencias.js     rutas del CRUD
+├── .env.example             plantilla de las variables MONGO_URI y ORIGEN_FRONTEND
+├── ENDPOINTS.md             documentación de las rutas
 └── package.json
 ```
+
+### Modelo `Inasistencia`
+
+| Campo | Tipo | Regla |
+|---|---|---|
+| `idInasistencia` | Number | obligatorio, mayor que 0, no se repite, no se edita |
+| `documento` | Number | obligatorio, documento del integrante de la comunidad educativa |
+| `fechaHora` | Date | obligatorio, fecha y hora del registro |
+| `idHorario` | Number | obligatorio |
+| `fechaInasistencia` | Date | obligatorio |
+| `novedades` | String | obligatorio |
 
 ## Cómo ejecutar
 
@@ -64,7 +80,7 @@ API-REST/
    ```
 
 4. En la consola deben aparecer «Servidor escuchando en http://localhost:10000» y «Conectado a la base de datos». Si la conexión falla, aparece «Error al conectar la base de datos».
-5. Abrir `http://localhost:10000` o probar las rutas en Postman.
+5. Probar las rutas en Postman o registrar una inasistencia desde el formulario del front-end (`http://localhost:8080`, con la aplicación Java encendida).
 
 ## Nota de seguridad
 
