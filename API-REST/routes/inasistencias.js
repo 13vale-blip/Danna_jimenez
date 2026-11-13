@@ -17,6 +17,17 @@ function esIdValido(id) {
   return mongoose.Types.ObjectId.isValid(id);
 }
 
+// Exige que los datos lleguen en formato JSON (cabecera Content-Type: application/json).
+// Si se envian como texto, body-parser no los lee y peticion.body queda vacio.
+function exigirJson(peticion, respuesta, siguiente) {
+  if (!peticion.is('application/json') || !peticion.body) {
+    return respuesta.status(400).json({
+      mensaje: 'Envie los datos en formato JSON (en Postman: Body → raw → JSON)',
+    });
+  }
+  siguiente();
+}
+
 // Convierte un error en una respuesta JSON con el codigo HTTP adecuado
 function responderError(respuesta, error) {
   if (error.name === 'ValidationError' || error.name === 'CastError') {
@@ -29,7 +40,7 @@ function responderError(respuesta, error) {
 }
 
 // CREATE: registra una inasistencia
-router.post('/', async (peticion, respuesta) => {
+router.post('/', exigirJson, async (peticion, respuesta) => {
   try {
     const { idInasistencia, documento, fechaHora, idHorario, fechaInasistencia, novedades } = peticion.body;
     const nuevaInasistencia = new Inasistencia({
@@ -70,7 +81,7 @@ router.get('/:id', async (peticion, respuesta) => {
 });
 
 // UPDATE: modifica uno o varios campos de una inasistencia
-router.patch('/:id', async (peticion, respuesta) => {
+router.patch('/:id', exigirJson, async (peticion, respuesta) => {
   const { id } = peticion.params;
   if (!esIdValido(id)) {
     return respuesta.status(400).json({ mensaje: 'El id no es valido' });

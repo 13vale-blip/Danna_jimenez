@@ -92,6 +92,7 @@ Respuesta `200 OK`:
 | `400` | Falta un campo obligatorio o tiene un tipo incorrecto | `Datos no validos` (con el detalle) |
 | `400` | El `:id` no tiene formato de ObjectId | `El id no es valido` |
 | `400` | El cuerpo no es un JSON válido | `El cuerpo de la peticion no es un JSON valido` |
+| `400` | POST o PATCH enviado como texto (en Postman, raw → Text en vez de JSON) | `Envie los datos en formato JSON (en Postman: Body → raw → JSON)` |
 | `400` | PATCH sin campos o intentando cambiar `idInasistencia` | `Envie al menos un campo...` / `El idInasistencia no se puede modificar` |
 | `404` | No existe una inasistencia con ese `_id` | `Inasistencia no encontrada` |
 | `409` | Ya existe una inasistencia con ese `idInasistencia` | `Ya existe una inasistencia con ese idInasistencia` |
